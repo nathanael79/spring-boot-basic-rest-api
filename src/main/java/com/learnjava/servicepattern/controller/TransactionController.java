@@ -33,7 +33,6 @@ public class TransactionController {
     }
 
     @RequestMapping("/api/v1/transactions")
-
     public ResponseEntity<Object> index(){
         try{
             List<Transaction> transactions = transactionService.getAllTransaction();
