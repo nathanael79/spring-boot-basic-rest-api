@@ -1,14 +1,25 @@
 package com.learnjava.servicepattern.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "Transaction")
+@Table(name = "transactions")
 public class Transaction {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,16 +35,8 @@ public class Transaction {
     @Column(name="date")
     private String date;
 
-
-    public Transaction() {
-    }
-
-    public Transaction(Integer id, String type, String email, String date) {
-        this.id = id;
-        this.type = type;
-        this.email = email;
-        this.date = date;
-    }
+    @OneToMany(mappedBy = "transaction")
+    private List<TransactionDetail> transactionDetails;
 
     public Integer getId() {
         return this.id;
@@ -67,4 +70,11 @@ public class Transaction {
         this.date = date;
     }
 
+    public List<TransactionDetail> getTransactionDetails() {
+        return this.transactionDetails;
+    }
+
+    public void setTransactionDetails(List<TransactionDetail> transactionDetails) {
+        this.transactionDetails = transactionDetails;
+    }
 }
